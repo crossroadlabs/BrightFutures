@@ -295,7 +295,7 @@ extension BrightFuturesTests {
     func testDefaultCallbackExecutionContextFromBackground() {
         let f = Future<Int, NoError>(value: 1)
         let e = self.expectation()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        global.async {
             f.onSuccess { _ in
                 XCTAssert(!NSThread.isMainThread(), "the callback should not be on the main thread")
                 e.fulfill()
@@ -1103,7 +1103,7 @@ extension BrightFuturesTests {
                 let context = randomContext()
                 let e = self.expectationWithDescription("future completes in context \(context)")
                 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                global.async {
                     usleep(arc4random_uniform(100))
                     
                     f.onComplete(context) { res in
@@ -1155,6 +1155,7 @@ extension BrightFuturesTests {
         self.waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    #if !os(Linux)
     // Test for https://github.com/Thomvis/BrightFutures/issues/18
     func testCompletionBlockOnMainQueue() {
         var key = "mainqueuespecifickey"
@@ -1173,6 +1174,7 @@ extension BrightFuturesTests {
         
         self.waitForExpectationsWithTimeout(2, handler: nil)
     }
+    #endif
     
     func testRelease() {
         weak var f: Future<Int, NoError>? = nil

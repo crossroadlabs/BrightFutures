@@ -56,15 +56,15 @@ extension NSCondition {
     }
 }
 
-/// A tiny wrapper around dispatch_semaphore
+/// A tiny wrapper around NSCondition
 public class Semaphore {
 
-    /// The underlying `dispatch_semaphore_t`
+    /// The underlying NSCondition
     private(set) public var underlyingSemaphore: NSCondition
     private(set) public var value: Int
     
     /// Creates a new semaphore with the given initial value
-    /// See `dispatch_semaphore_create(value: Int) -> dispatch_semaphore_t!`
+    /// See NSCondition and https://developer.apple.com/library/prerelease/mac/documentation/Cocoa/Conceptual/Multithreading/ThreadSafety/ThreadSafety.html#//apple_ref/doc/uid/10000057i-CH8-SW13
     public init(value: Int) {
         self.underlyingSemaphore = NSCondition()
         self.value = value
