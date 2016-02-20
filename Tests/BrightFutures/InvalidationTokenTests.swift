@@ -9,6 +9,7 @@
 import XCTest
 import BrightFutures
 import ExecutionContext
+import Result
 
 class InvalidationTokenTests: XCTestCase {
 

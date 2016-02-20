@@ -23,6 +23,7 @@
 import XCTest
 import BrightFutures
 import ExecutionContext
+import Result
 
 class QueueTests: XCTestCase {
 
