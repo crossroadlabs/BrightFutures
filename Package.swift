@@ -24,6 +24,7 @@ import PackageDescription
 
 let package = Package(
     name: "BrightFutures",
+    exclude: ["BrightFutures.xcworkspace", "Documentation", "Carthage"],
     targets: [
         Target(
             name: "BrightFutures"
