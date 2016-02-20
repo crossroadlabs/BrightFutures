@@ -30,7 +30,7 @@ class QueueTests: XCTestCase {
         let e = self.expectationWithDescription("")
         global.async {
             main.sync {
-                XCTAssert(NSThread.isMainThread(), "executing on the main queue should happen on the main thread")
+                XCTAssert(isMainThread(), "executing on the main queue should happen on the main thread")
             }
             e.fulfill()
         }

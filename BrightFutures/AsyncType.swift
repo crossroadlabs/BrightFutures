@@ -62,7 +62,7 @@ public extension AsyncType {
     /// Will pass the main queue if we are currently on the main thread, or the
     /// global queue otherwise
     public func delay(interval: NSTimeInterval) -> Self {
-        if NSThread.isMainThread() {
+        if isMainThread() {
             return delay(main, interval: interval)
         }
         

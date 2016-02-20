@@ -271,10 +271,10 @@ extension BrightFuturesTests {
         let e = self.expectation()
         
         future { _ -> Int in
-            XCTAssert(!NSThread.isMainThread())
+            XCTAssert(!isMainThread())
             return 1
         }.onSuccess(mainContext) { value in
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             e.fulfill()
         }
         
@@ -285,7 +285,7 @@ extension BrightFuturesTests {
         let f = Future<Int, NoError>(value: 1)
         let e = self.expectation()
         f.onSuccess { _ in
-            XCTAssert(NSThread.isMainThread(), "the callback should run on main")
+            XCTAssert(isMainThread(), "the callback should run on main")
             e.fulfill()
         }
         
@@ -297,7 +297,7 @@ extension BrightFuturesTests {
         let e = self.expectation()
         global.async {
             f.onSuccess { _ in
-                XCTAssert(!NSThread.isMainThread(), "the callback should not be on the main thread")
+                XCTAssert(!isMainThread(), "the callback should not be on the main thread")
                 e.fulfill()
             }
             return
@@ -696,11 +696,11 @@ extension BrightFuturesTests {
         
         let e = self.expectation()
         f.onComplete(ImmediateExecutionContext) { _ in
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             XCTAssert(isAsync)
             XCTAssert(CACurrentMediaTime() - t0 >= 0)
         }.delay(1).onComplete { _ in
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             XCTAssert(CACurrentMediaTime() - t0 >= 1)
             e.fulfill()
         }
@@ -713,7 +713,7 @@ extension BrightFuturesTests {
         let e = self.expectation()
         global.async {
             Future<Int, NoError>(value: 1).delay(0).onComplete(ImmediateExecutionContext) { _ in
-                XCTAssert(!NSThread.isMainThread())
+                XCTAssert(!isMainThread())
                 e.fulfill()
             }
         }
@@ -855,7 +855,7 @@ extension BrightFuturesTests {
         let e = self.expectation()
         
         Array(1...10).traverse(mainContext) { _ -> Future<Int, NoError> in
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             return Future(value: 1)
         }.onComplete { _ in
             e.fulfill()
@@ -906,7 +906,7 @@ extension BrightFuturesTests {
         let e = self.expectation()
         
         [Future<Int, NoError>(value: 1)].fold(mainContext, zero: 10) { remainder, elem -> Int in
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             return remainder + elem
         }.onSuccess { val in
             XCTAssertEqual(val, 11)

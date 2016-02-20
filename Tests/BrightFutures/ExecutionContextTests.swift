@@ -36,7 +36,7 @@ class ExecutionContextTests: XCTestCase {
         counter.i = 1
         
         ImmediateOnMainExecutionContext {
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             counter.i = 2
         }
         
@@ -47,7 +47,7 @@ class ExecutionContextTests: XCTestCase {
         let e = self.expectation()
         global.async {
             ImmediateOnMainExecutionContext {
-                XCTAssert(NSThread.isMainThread())
+                XCTAssert(isMainThread())
                 e.fulfill()
             }
         }
