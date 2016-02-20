@@ -46,10 +46,12 @@ public func toContext(ec: ExecutionContextType) -> ExecutionContext {
     return ec.async
 }
 
+#if !os(Linux)
 /// Creates an asynchronous ExecutionContext bound to the given queue
 public func toContext(queue: dispatch_queue_t) -> ExecutionContext {
-    return toContext(DefaultExecutionContext(queue: queue))
+    return toContext(DispatchExecutionContext(queue: queue))
 }
+#endif
 
 typealias ThreadingModel = () -> ExecutionContext
 

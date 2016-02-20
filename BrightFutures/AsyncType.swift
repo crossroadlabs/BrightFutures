@@ -71,7 +71,7 @@ public extension AsyncType {
 
     /// Returns an Async that will complete with the result that this Async completes with
     /// after waiting for the given interval
-    /// The delay is implemented using dispatch_after. The given queue is passed to that function.
+    /// The delay is implemented using ExecutionContext async with delay. The given queue is passed to that function.
     /// If you want a delay of 0 to mean 'delay until next runloop', you will want to pass the main
     /// queue.
     public func delay(ec: ExecutionContextType, interval: NSTimeInterval) -> Self {

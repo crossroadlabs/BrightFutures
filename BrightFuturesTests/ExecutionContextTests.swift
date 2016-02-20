@@ -55,6 +55,8 @@ class ExecutionContextTests: XCTestCase {
         self.waitForExpectationsWithTimeout(2, handler: nil)
     }
     
+    #if !os(Linux)
+    
     func testDispatchQueueToContext() {
         var key = "key"
         let value1 = getMutablePointer("queue1")
@@ -81,6 +83,8 @@ class ExecutionContextTests: XCTestCase {
         
         self.waitForExpectationsWithTimeout(2, handler: nil)
     }
+
+    #endif
     
     func getMutablePointer (object: AnyObject) -> UnsafeMutablePointer<Void> {
         return UnsafeMutablePointer<Void>(bitPattern: Int(ObjectIdentifier(object).uintValue))
