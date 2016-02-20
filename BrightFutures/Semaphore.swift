@@ -41,18 +41,24 @@ public enum TimeInterval {
         }
     }
     #endif
+    
+    public func untilFromNow() -> NSDate? {
+        switch self {
+        case .Forever:
+            return nil
+        case .In(let interval):
+            return NSDate(timeIntervalSinceNow: interval)
+        }
+    }
 }
 
 extension NSCondition {
-    func waitInterval(interval:TimeInterval) -> Bool {
-        switch interval {
-        case .Forever:
+    func waitWithConditionalEnd(date:NSDate?) -> Bool {
+        guard let date = date else {
             self.wait()
             return true
-        case .In(let interval):
-            let date = NSDate(timeIntervalSinceNow: interval)
-            return self.waitUntilDate(date)
         }
+        return self.waitUntilDate(date)
     }
 }
 
@@ -85,16 +91,22 @@ public class Semaphore {
     /// Returns 0 if the semaphore was signalled before the timeout occurred
     /// or non-zero if the timeout occurred.
     public func wait(timeout: TimeInterval) -> Int {
+        let until = timeout.untilFromNow()
         underlyingSemaphore.lock()
         defer {
             value -= 1
             underlyingSemaphore.unlock()
         }
-        if value <= 0 {
-            let signaled = underlyingSemaphore.waitInterval(timeout)
-            return signaled ? 0 : 1
+        
+        var signaled:Bool = true
+        while value <= 0 {
+            signaled = underlyingSemaphore.waitWithConditionalEnd(until)
+            if !signaled {
+                break
+            }
         }
-        return 0
+        
+        return signaled ? 0 : 1
     }
     
     /// Performs the signal operation on this semaphore
