@@ -22,3 +22,13 @@ class SemaphoreTests: XCTestCase {
     }
     
 }
+
+#if os(Linux)
+extension SemaphoreTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testInit", testInit),
+		]
+	}
+}
+#endif

@@ -91,3 +91,15 @@ class ExecutionContextTests: XCTestCase {
     }
     
 }
+
+#if os(Linux)
+extension ExecutionContextTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testImmediateOnMainThreadContextOnMainThread", testImmediateOnMainThreadContextOnMainThread),
+			("testImmediateOnMainThreadContextOnBackgroundThread", testImmediateOnMainThreadContextOnBackgroundThread),
+			("testDispatchQueueToContext", testDispatchQueueToContext),
+		]
+	}
+}
+#endif

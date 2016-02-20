@@ -118,3 +118,21 @@ class PromiseTests: XCTestCase {
         XCTAssertEqual(p.future.error, .JustAnError)
     }
 }
+
+#if os(Linux)
+extension PromiseTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testSuccessPromise", testSuccessPromise),
+			("testFailurePromise", testFailurePromise),
+			("testCompletePromise", testCompletePromise),
+			("testPromiseCompleteWithSuccess", testPromiseCompleteWithSuccess),
+			("testPromiseCompleteWithFailure", testPromiseCompleteWithFailure),
+			("testPromiseTrySuccessTwice", testPromiseTrySuccessTwice),
+			("testPromiseTryFailureTwice", testPromiseTryFailureTwice),
+			("testPromiseCompleteWithSucceedingFuture", testPromiseCompleteWithSucceedingFuture),
+			("testPromiseCompleteWithFailingFuture", testPromiseCompleteWithFailingFuture),
+		]
+	}
+}
+#endif
