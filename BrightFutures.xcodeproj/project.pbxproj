@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		659E80AE1C7831D100DE85B1 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9CBFD0B1B8264E500702394 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		659E80B01C78365C00DE85B1 /* ExecutionContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */; };
+		659E80B11C78367A00DE85B1 /* ExecutionContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */; };
+		659E80B21C78368000DE85B1 /* ExecutionContext.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9039ADD1A45DF8D000DD6F1 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9039ADC1A45DF8D000DD6F1 /* ResultTests.swift */; };
 		E907D1DE1A6AE4A000AB8075 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907D1DD1A6AE4A000AB8075 /* Semaphore.swift */; };
 		E9319EA41A397D2C00A0604A /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9319EA31A397D2C00A0604A /* QueueTests.swift */; };
@@ -149,12 +152,14 @@
 			files = (
 				E9F496E51B03981100F82839 /* BrightFutures.framework in CopyFiles */,
 				659E80AE1C7831D100DE85B1 /* Result.framework in CopyFiles */,
+				659E80B21C78368000DE85B1 /* ExecutionContext.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExecutionContext.framework; path = Carthage/Build/Mac/ExecutionContext.framework; sourceTree = "<group>"; };
 		E9039ADC1A45DF8D000DD6F1 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		E907D1DD1A6AE4A000AB8075 /* Semaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semaphore.swift; sourceTree = "<group>"; };
 		E9319EA31A397D2C00A0604A /* QueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -223,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				659E80B01C78365C00DE85B1 /* ExecutionContext.framework in Frameworks */,
 				E9CBFD0C1B8264E500702394 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D45B0B1AF00659000F6CA7 /* BrightFutures.framework in Frameworks */,
+				659E80B11C78367A00DE85B1 /* ExecutionContext.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +283,7 @@
 		E90E9D5D1B1B8A5B00A8F9F3 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
+				659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */,
 				E9CBFD0B1B8264E500702394 /* Result.framework */,
 			);
 			name = Mac;
