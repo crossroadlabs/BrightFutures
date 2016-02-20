@@ -25,3 +25,7 @@ Podfile.lock
 *.xcscmblueprint
 
 Carthage/Checkouts/ExecutionContext
+
+#Linux
+.build/
+Packages/

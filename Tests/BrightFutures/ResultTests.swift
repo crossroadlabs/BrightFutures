@@ -224,3 +224,16 @@ func divide(a: Int, _ b: Int) -> Result<Int, MathError> {
     
     return Result(value: a / b)
 }
+
+#if os(Linux)
+extension ResultTests : XCTestCaseProvider {
+    var allTests : [(String, () throws -> Void)] {
+        return [
+            ("testFlattenFailedFutureInSucceededResult", testFlattenFailedFutureInSucceededResult),
+            ("testFlattenFutureInResultFailed", testFlattenFutureInResultFailed),
+            ("testFlattenFutureInResultSuccess", testFlattenFutureInResultSuccess),
+            ("testFlattenInnerFailure", testFlattenInnerFailure)
+        ]
+    }
+}
+#endif

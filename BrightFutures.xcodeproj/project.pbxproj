@@ -368,7 +368,8 @@
 				E99397C31BAD49EC00A0B077 /* NSOperationQueueTests.swift */,
 				E9DF0825194470060083F7F2 /* Supporting Files */,
 			);
-			path = BrightFuturesTests;
+			name = BrightFuturesTests;
+			path = Tests/BrightFutures;
 			sourceTree = "<group>";
 		};
 		E9DF0825194470060083F7F2 /* Supporting Files */ = {
@@ -846,7 +847,7 @@
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = BrightFuturesTests/Info.plist;
+				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.BrightFutures-tvOSTests";
@@ -862,7 +863,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = BrightFuturesTests/Info.plist;
+				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.BrightFutures-tvOSTests";
@@ -1003,7 +1004,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = BrightFuturesTests/Info.plist;
+				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1025,7 +1026,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = BrightFuturesTests/Info.plist;
+				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1178,7 +1179,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = BrightFuturesTests/Info.plist;
+				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.${PRODUCT_NAME:rfc1034identifier}";
@@ -1194,7 +1195,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = BrightFuturesTests/Info.plist;
+				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.${PRODUCT_NAME:rfc1034identifier}";
