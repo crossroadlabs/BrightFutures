@@ -32,9 +32,13 @@ public let ImmediateExecutionContext: ExecutionContext = { task in
     task()
 }
 
+public func isMainThread() -> Bool {
+    return CFRunLoopGetMain() === CFRunLoopGetCurrent()
+}
+
 /// Runs immediately if on the main thread, otherwise asynchronously on the main thread
 public let ImmediateOnMainExecutionContext: ExecutionContext = { task in
-    if NSThread.isMainThread() {
+    if isMainThread() {
         task()
     } else {
         main.async(task)
@@ -61,7 +65,7 @@ var DefaultThreadingModel: ThreadingModel = defaultContext
 /// - if on the main thread, `Queue.main.context` is returned
 /// - if off the main thread, `Queue.global.context` is returned
 func defaultContext() -> ExecutionContext {
-    return toContext(NSThread.isMainThread() ? main : global)
+    return toContext(isMainThread() ? main : global)
 }
 
 public let globalContext = toContext(global)
