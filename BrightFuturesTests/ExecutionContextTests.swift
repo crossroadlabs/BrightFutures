@@ -22,6 +22,7 @@
 
 import XCTest
 import BrightFutures
+import ExecutionContext
 
 class Counter {
     var i: Int = 0
@@ -44,7 +45,7 @@ class ExecutionContextTests: XCTestCase {
     
     func testImmediateOnMainThreadContextOnBackgroundThread() {
         let e = self.expectation()
-        Queue.global.async {
+        global.async {
             ImmediateOnMainExecutionContext {
                 XCTAssert(NSThread.isMainThread())
                 e.fulfill()

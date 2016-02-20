@@ -8,6 +8,7 @@
 
 import XCTest
 import BrightFutures
+import ExecutionContext
 
 class InvalidationTokenTests: XCTestCase {
 
@@ -45,7 +46,7 @@ class InvalidationTokenTests: XCTestCase {
         }
         
         let e = self.expectation()
-        Queue.global.async {
+        global.async {
             token.invalidate()
             p.success(2)
             NSThread.sleepForTimeInterval(0.2); // make sure onSuccess is not called
@@ -96,7 +97,7 @@ class InvalidationTokenTests: XCTestCase {
             var i = 0
         }
         
-        let q = Queue()
+        let ec = ExecutionContext(kind: .Serial)
         
         var token: InvalidationToken!
         let counter = Counter()
@@ -108,17 +109,17 @@ class InvalidationTokenTests: XCTestCase {
                 let sleep: NSTimeInterval = NSTimeInterval(arc4random() % 100) / 100000.0
                 NSThread.sleepForTimeInterval(sleep)
                 return true
-            }.onSuccess(token.validContext(q.context)) { _ in
+            }.onSuccess(token.validContext(ec.futureContext)) { _ in
                 XCTAssert(!token.isInvalid)
                 XCTAssertEqual(currentI, counter.i, "onSuccess should only get called if the counter did not increment")
-            }.onComplete(Queue.global.context) { _ in
+            }.onComplete(globalContext) { _ in
                 NSThread.sleepForTimeInterval(0.0001);
                 e.fulfill()
             }
             
             NSThread.sleepForTimeInterval(0.0005)
             
-            q.sync {
+            try! ec.sync {
                 token.invalidate()
                 counter.i++
             }

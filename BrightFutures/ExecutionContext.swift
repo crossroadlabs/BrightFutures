@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import Foundation
+import ExecutionContext
 
 /// The context in which something can be executed
 /// By default, an execution context can be assumed to be asynchronous unless stated otherwise
@@ -36,18 +37,18 @@ public let ImmediateOnMainExecutionContext: ExecutionContext = { task in
     if NSThread.isMainThread() {
         task()
     } else {
-        Queue.main.async(task)
+        main.async(task)
     }
 }
 
 /// Creates an asynchronous ExecutionContext bound to the given queue
-public func toContext(queue: Queue) -> ExecutionContext {
-    return queue.context
+public func toContext(ec: ExecutionContextType) -> ExecutionContext {
+    return ec.async
 }
 
 /// Creates an asynchronous ExecutionContext bound to the given queue
 public func toContext(queue: dispatch_queue_t) -> ExecutionContext {
-    return Queue(queue: queue).context
+    return toContext(DefaultExecutionContext(queue: queue))
 }
 
 typealias ThreadingModel = () -> ExecutionContext
@@ -58,5 +59,16 @@ var DefaultThreadingModel: ThreadingModel = defaultContext
 /// - if on the main thread, `Queue.main.context` is returned
 /// - if off the main thread, `Queue.global.context` is returned
 func defaultContext() -> ExecutionContext {
-    return toContext(NSThread.isMainThread() ? Queue.main : Queue.global)
+    return toContext(NSThread.isMainThread() ? main : global)
+}
+
+public let globalContext = toContext(global)
+public let mainContext = toContext(main)
+
+public extension ExecutionContextType {
+    var futureContext:ExecutionContext {
+        get {
+            return toContext(self)
+        }
+    }
 }

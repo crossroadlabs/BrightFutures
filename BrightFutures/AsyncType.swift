@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ExecutionContext
 
 public protocol AsyncType {
     typealias Value
@@ -47,7 +48,7 @@ public extension AsyncType {
         
         let sema = Semaphore(value: 0)
         var res: Value? = nil
-        onComplete(Queue.global.context) {
+        onComplete(globalContext) {
             res = $0
             sema.signal()
         }
@@ -62,10 +63,10 @@ public extension AsyncType {
     /// global queue otherwise
     public func delay(interval: NSTimeInterval) -> Self {
         if NSThread.isMainThread() {
-            return delay(Queue.main, interval: interval)
+            return delay(main, interval: interval)
         }
         
-        return delay(Queue.global, interval: interval)
+        return delay(global, interval: interval)
     }
 
     /// Returns an Async that will complete with the result that this Async completes with
@@ -73,9 +74,9 @@ public extension AsyncType {
     /// The delay is implemented using dispatch_after. The given queue is passed to that function.
     /// If you want a delay of 0 to mean 'delay until next runloop', you will want to pass the main
     /// queue.
-    public func delay(queue: Queue, interval: NSTimeInterval) -> Self {
+    public func delay(ec: ExecutionContextType, interval: NSTimeInterval) -> Self {
         return Self { complete in
-            queue.after(.In(interval)) {
+            ec.async(interval) {
                 self.onComplete(ImmediateExecutionContext, callback: complete)
             }
         }

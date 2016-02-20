@@ -24,7 +24,6 @@
 		E98647B51BF3288400B6BEEE /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0831194470190083F7F2 /* ExecutionContext.swift */; };
 		E98647B61BF3288400B6BEEE /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0832194470190083F7F2 /* Future.swift */; };
 		E98647B71BF3288400B6BEEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0833194470190083F7F2 /* Promise.swift */; };
-		E98647B81BF3288400B6BEEE /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0834194470190083F7F2 /* Queue.swift */; };
 		E98647B91BF3288400B6BEEE /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907D1DD1A6AE4A000AB8075 /* Semaphore.swift */; };
 		E98647BA1BF3288400B6BEEE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F496EE1B052F1400F82839 /* Errors.swift */; };
 		E98647BB1BF3288400B6BEEE /* AsyncType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD4EEE1B4ED51A0070C2AF /* AsyncType.swift */; };
@@ -49,7 +48,6 @@
 		E9877CB41B826AA5009DB030 /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0831194470190083F7F2 /* ExecutionContext.swift */; };
 		E9877CB51B826AA5009DB030 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0832194470190083F7F2 /* Future.swift */; };
 		E9877CB61B826AA5009DB030 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0833194470190083F7F2 /* Promise.swift */; };
-		E9877CB71B826AA5009DB030 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0834194470190083F7F2 /* Queue.swift */; };
 		E9877CB81B826AA5009DB030 /* SequenceType+BrightFutures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979E5F31975B1AA007FE914 /* SequenceType+BrightFutures.swift */; };
 		E9877CB91B826AA5009DB030 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907D1DD1A6AE4A000AB8075 /* Semaphore.swift */; };
 		E9877CBA1B826AA5009DB030 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F496EE1B052F1400F82839 /* Errors.swift */; };
@@ -76,7 +74,6 @@
 		E9D45B1A1AF00668000F6CA7 /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0831194470190083F7F2 /* ExecutionContext.swift */; };
 		E9D45B1B1AF00668000F6CA7 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0832194470190083F7F2 /* Future.swift */; };
 		E9D45B1D1AF00668000F6CA7 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0833194470190083F7F2 /* Promise.swift */; };
-		E9D45B1E1AF00668000F6CA7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0834194470190083F7F2 /* Queue.swift */; };
 		E9D45B1F1AF00670000F6CA7 /* SequenceType+BrightFutures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979E5F31975B1AA007FE914 /* SequenceType+BrightFutures.swift */; };
 		E9D45B201AF00670000F6CA7 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907D1DD1A6AE4A000AB8075 /* Semaphore.swift */; };
 		E9D45B211AF00676000F6CA7 /* BrightFuturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0827194470060083F7F2 /* BrightFuturesTests.swift */; };
@@ -93,7 +90,6 @@
 		E9DF0835194470190083F7F2 /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0831194470190083F7F2 /* ExecutionContext.swift */; };
 		E9DF0836194470190083F7F2 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0832194470190083F7F2 /* Future.swift */; };
 		E9DF0837194470190083F7F2 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0833194470190083F7F2 /* Promise.swift */; };
-		E9DF0838194470190083F7F2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0834194470190083F7F2 /* Queue.swift */; };
 		E9E422C61B1FA28F0000558F /* ErrorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E422C51B1FA28F0000558F /* ErrorsTests.swift */; };
 		E9E422C71B1FA28F0000558F /* ErrorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E422C51B1FA28F0000558F /* ErrorsTests.swift */; };
 		E9E422C91B1FA5300000558F /* ExecutionContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E422C81B1FA5300000558F /* ExecutionContextTests.swift */; };
@@ -191,7 +187,6 @@
 		E9DF0831194470190083F7F2 /* ExecutionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionContext.swift; sourceTree = "<group>"; };
 		E9DF0832194470190083F7F2 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		E9DF0833194470190083F7F2 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
-		E9DF0834194470190083F7F2 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E9E422C51B1FA28F0000558F /* ErrorsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorsTests.swift; sourceTree = "<group>"; };
 		E9E422C81B1FA5300000558F /* ExecutionContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionContextTests.swift; sourceTree = "<group>"; };
 		E9F496EE1B052F1400F82839 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -336,7 +331,6 @@
 				E9DF0831194470190083F7F2 /* ExecutionContext.swift */,
 				E9DF0832194470190083F7F2 /* Future.swift */,
 				E9DF0833194470190083F7F2 /* Promise.swift */,
-				E9DF0834194470190083F7F2 /* Queue.swift */,
 				E907D1DD1A6AE4A000AB8075 /* Semaphore.swift */,
 				E9F496EE1B052F1400F82839 /* Errors.swift */,
 				E9DD4EEE1B4ED51A0070C2AF /* AsyncType.swift */,
@@ -645,7 +639,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98647B81BF3288400B6BEEE /* Queue.swift in Sources */,
 				E98647C21BF3288400B6BEEE /* NSOperationQueue+BrightFutures.swift in Sources */,
 				E98647BD1BF3288400B6BEEE /* AsyncType+ResultType.swift in Sources */,
 				E98647B61BF3288400B6BEEE /* Future.swift in Sources */,
@@ -683,7 +676,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9877CB71B826AA5009DB030 /* Queue.swift in Sources */,
 				E943D28F1BAC0FFD00E9EFB3 /* NSOperationQueue+BrightFutures.swift in Sources */,
 				E9877CB51B826AA5009DB030 /* Future.swift in Sources */,
 				E9877CB41B826AA5009DB030 /* ExecutionContext.swift in Sources */,
@@ -708,7 +700,6 @@
 				E9F496F01B052F1400F82839 /* Errors.swift in Sources */,
 				E943D28E1BAC0FFD00E9EFB3 /* NSOperationQueue+BrightFutures.swift in Sources */,
 				E9D45B1B1AF00668000F6CA7 /* Future.swift in Sources */,
-				E9D45B1E1AF00668000F6CA7 /* Queue.swift in Sources */,
 				E9F69B9C1B93347200713A91 /* Result+BrightFutures.swift in Sources */,
 				E9D45B1A1AF00668000F6CA7 /* ExecutionContext.swift in Sources */,
 				E9DD4EF21B4F16C00070C2AF /* Async.swift in Sources */,
@@ -757,7 +748,6 @@
 				E9D923AC1A6CE29A00CADD9F /* InvalidationToken.swift in Sources */,
 				E907D1DE1A6AE4A000AB8075 /* Semaphore.swift in Sources */,
 				E992A95F1B501AC800A9FC4F /* AsyncType+ResultType.swift in Sources */,
-				E9DF0838194470190083F7F2 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
