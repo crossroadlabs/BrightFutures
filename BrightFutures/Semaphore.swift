@@ -29,6 +29,8 @@ public enum TimeInterval {
     case Forever
     case In(NSTimeInterval)
     
+    //whatever, may be someone uses it
+    #if !os(Linux)
     /// Returns the `dispatch_time_t` representation of this interval
     public var dispatchTime: dispatch_time_t {
         switch self {
@@ -38,18 +40,34 @@ public enum TimeInterval {
             return dispatch_time(DISPATCH_TIME_NOW, Int64(interval * NSTimeInterval(NSEC_PER_SEC)))
         }
     }
+    #endif
+}
+
+extension NSCondition {
+    func waitInterval(interval:TimeInterval) -> Bool {
+        switch interval {
+        case .Forever:
+            self.wait()
+            return true
+        case .In(let interval):
+            let date = NSDate(timeIntervalSinceNow: interval)
+            return self.waitUntilDate(date)
+        }
+    }
 }
 
 /// A tiny wrapper around dispatch_semaphore
 public class Semaphore {
 
     /// The underlying `dispatch_semaphore_t`
-    private(set) public var underlyingSemaphore: dispatch_semaphore_t
+    private(set) public var underlyingSemaphore: NSCondition
+    private(set) public var value: Int
     
     /// Creates a new semaphore with the given initial value
     /// See `dispatch_semaphore_create(value: Int) -> dispatch_semaphore_t!`
     public init(value: Int) {
-        self.underlyingSemaphore = dispatch_semaphore_create(value)
+        self.underlyingSemaphore = NSCondition()
+        self.value = value
     }
     
     /// Creates a new semaphore with initial value 1
@@ -67,12 +85,27 @@ public class Semaphore {
     /// Returns 0 if the semaphore was signalled before the timeout occurred
     /// or non-zero if the timeout occurred.
     public func wait(timeout: TimeInterval) -> Int {
-        return dispatch_semaphore_wait(self.underlyingSemaphore, timeout.dispatchTime)
+        underlyingSemaphore.lock()
+        defer {
+            value -= 1
+            underlyingSemaphore.unlock()
+        }
+        if value <= 0 {
+            let signaled = underlyingSemaphore.waitInterval(timeout)
+            return signaled ? 0 : 1
+        }
+        return 0
     }
     
     /// Performs the signal operation on this semaphore
     public func signal() -> Int {
-        return dispatch_semaphore_signal(self.underlyingSemaphore)
+        underlyingSemaphore.lock()
+        defer {
+            underlyingSemaphore.unlock()
+        }
+        value += 1
+        underlyingSemaphore.signal()
+        return value
     }
 
     /// Executes the given closure between a `self.wait()` and `self.signal()`
