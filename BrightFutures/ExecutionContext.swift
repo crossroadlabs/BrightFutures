@@ -22,6 +22,7 @@
 
 import Foundation
 import ExecutionContext
+import CoreFoundation
 
 /// The context in which something can be executed
 /// By default, an execution context can be assumed to be asynchronous unless stated otherwise
