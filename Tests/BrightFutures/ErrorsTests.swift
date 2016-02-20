@@ -45,3 +45,13 @@ class ErrorsTests: XCTestCase {
     }
     
 }
+
+#if os(Linux)
+extension ErrorsTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testExternalError", testExternalError),
+		]
+	}
+}
+#endif

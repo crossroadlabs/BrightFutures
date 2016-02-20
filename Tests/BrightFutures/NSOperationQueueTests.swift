@@ -40,3 +40,13 @@ class NSOperationQueueTests: XCTestCase {
     }
     
 }
+
+#if os(Linux)
+extension NSOperationQueueTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testMaxConcurrentOperationCount", testMaxConcurrentOperationCount),
+		]
+	}
+}
+#endif

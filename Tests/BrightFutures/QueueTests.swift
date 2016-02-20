@@ -139,3 +139,21 @@ class QueueTests: XCTestCase {
     }
 
 }
+
+#if os(Linux)
+extension QueueTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testMain", testMain),
+			("testSync", testSync),
+			("testSyncWithResult", testSyncWithResult),
+			("testSyncThrowsNone", testSyncThrowsNone),
+			("testSyncThrowsError", testSyncThrowsError),
+			("testAsync", testAsync),
+			("testAsyncFuture", testAsyncFuture),
+			("testAfter", testAfter),
+			("testAfterFuture", testAfterFuture),
+		]
+	}
+}
+#endif
