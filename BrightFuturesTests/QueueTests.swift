@@ -28,7 +28,7 @@ class QueueTests: XCTestCase {
 
     func testMain() {
         let e = self.expectationWithDescription("")
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        global.async {
             main.sync {
                 XCTAssert(NSThread.isMainThread(), "executing on the main queue should happen on the main thread")
             }
