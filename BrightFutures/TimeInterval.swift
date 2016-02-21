@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import Foundation
+import ExecutionContext
 
 /// Represents a TimeInterval. The interval is either ending 
 /// (e.g. `.In(2)` means 2 seconds)
@@ -52,78 +53,16 @@ public enum TimeInterval {
     }
 }
 
-extension NSCondition {
-    func waitWithConditionalEnd(date:NSDate?) -> Bool {
-        guard let date = date else {
-            self.wait()
-            return true
-        }
-        return self.waitUntilDate(date)
-    }
-}
-
-/// A tiny wrapper around NSCondition
-public class Semaphore {
-
-    /// The underlying NSCondition
-    private(set) public var underlyingSemaphore: NSCondition
-    private(set) public var value: Int
-    
-    /// Creates a new semaphore with the given initial value
-    /// See NSCondition and https://developer.apple.com/library/prerelease/mac/documentation/Cocoa/Conceptual/Multithreading/ThreadSafety/ThreadSafety.html#//apple_ref/doc/uid/10000057i-CH8-SW13
-    public init(value: Int) {
-        self.underlyingSemaphore = NSCondition()
-        self.value = value
-    }
-    
-    /// Creates a new semaphore with initial value 1
-    /// This kind of semaphores is useful to protect a critical section
-    public convenience init() {
-        self.init(value: 1)
-    }
-    
-    /// Performs the wait operation on this semaphore
-    public func wait() {
-        self.wait(.Forever)
-    }
-    
-    /// Performs the wait operation on this semaphore until the timeout
-    /// Returns 0 if the semaphore was signalled before the timeout occurred
-    /// or non-zero if the timeout occurred.
-    public func wait(timeout: TimeInterval) -> Int {
-        let until = timeout.untilFromNow()
-        underlyingSemaphore.lock()
-        defer {
-            value -= 1
-            underlyingSemaphore.unlock()
-        }
-        
-        var signaled:Bool = true
-        while value <= 0 {
-            signaled = underlyingSemaphore.waitWithConditionalEnd(until)
-            if !signaled {
-                break
-            }
-        }
-        
-        return signaled ? 0 : 1
-    }
-    
-    /// Performs the signal operation on this semaphore
-    public func signal() -> Int {
-        underlyingSemaphore.lock()
-        defer {
-            underlyingSemaphore.unlock()
-        }
-        value += 1
-        underlyingSemaphore.signal()
-        return value
-    }
-
+extension Semaphore {
     /// Executes the given closure between a `self.wait()` and `self.signal()`
-    public func execute(@noescape task: () -> Void) {
+    func execute(@noescape task: () -> Void) {
         self.wait()
         task()
         self.signal()
+    }
+    
+    /// waits...
+    func wait(interval:TimeInterval) -> Bool {
+        return wait(interval.untilFromNow())
     }
 }
