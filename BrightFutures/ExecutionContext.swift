@@ -24,56 +24,78 @@ import Foundation
 import ExecutionContext
 import CoreFoundation
 
-/// The context in which something can be executed
-/// By default, an execution context can be assumed to be asynchronous unless stated otherwise
-public typealias ExecutionContext = (() -> Void) -> Void
-
-/// Immediately executes the given task. No threading, no semaphores.
-public let ImmediateExecutionContext: ExecutionContext = { task in
-    task()
-}
-
 public func isMainThread() -> Bool {
     return CFRunLoopGetMain() === CFRunLoopGetCurrent()
 }
 
-/// Runs immediately if on the main thread, otherwise asynchronously on the main thread
-public let ImmediateOnMainExecutionContext: ExecutionContext = { task in
-    if isMainThread() {
-        task()
-    } else {
-        main.async(task)
+private class ImmediateOnMainExecutionContextClass : ExecutionContextBase, ExecutionContextType {
+    func async(task:SafeTask) {
+        if isMainThread() {
+            task()
+        } else {
+            main.async(task)
+        }
+    }
+    
+    func async(after:Double, task:SafeTask) {
+        let sec = time_t(after)
+        let nsec = Int((after - Double(sec)) * 1000 * 1000 * 1000)//nano seconds
+        var time = timespec(tv_sec:sec, tv_nsec: nsec)
+        
+        nanosleep(&time, nil)
+        async(task)
+    }
+    
+    func sync<ReturnType>(task:() throws -> ReturnType) throws -> ReturnType {
+        if isMainThread() {
+            return try task()
+        } else {
+            return try main.sync(task)
+        }
     }
 }
 
+/// Immediately executes the given task. No threading, no semaphores.
+/// Just for backward compatibility
+public let ImmediateExecutionContext: ExecutionContextType = immediate
+
+/// Runs immediately if on the main thread, otherwise asynchronously on the main thread
+public let ImmediateOnMainExecutionContext: ExecutionContextType = ImmediateOnMainExecutionContextClass()
+public let immediateOnMain: ExecutionContextType = ImmediateOnMainExecutionContext
+
 /// Creates an asynchronous ExecutionContext bound to the given queue
-public func toContext(ec: ExecutionContextType) -> ExecutionContext {
-    return ec.async
+/// Just for backward compatibility
+public func toContext(ec: ExecutionContextType) -> ExecutionContextType {
+    return ec
 }
 
 #if !os(Linux)
 /// Creates an asynchronous ExecutionContext bound to the given queue
-public func toContext(queue: dispatch_queue_t) -> ExecutionContext {
+public func toContext(queue: dispatch_queue_t) -> ExecutionContextType {
     return toContext(DispatchExecutionContext(queue: queue))
 }
 #endif
 
-typealias ThreadingModel = () -> ExecutionContext
+typealias ThreadingModel = () -> ExecutionContextType
 
 var DefaultThreadingModel: ThreadingModel = defaultContext
 
 /// Defines BrightFutures' default threading behavior:
 /// - if on the main thread, `Queue.main.context` is returned
 /// - if off the main thread, `Queue.global.context` is returned
-func defaultContext() -> ExecutionContext {
+func defaultContext() -> ExecutionContextType {
     return toContext(isMainThread() ? main : global)
 }
 
-public let globalContext = toContext(global)
-public let mainContext = toContext(main)
+/// Just for backward compatibility
+public struct Queue {
+    public static let main = ExecutionContext.main
+    public static let global = ExecutionContext.global
+}
 
+/// Just for backward compatibility
 public extension ExecutionContextType {
-    var futureContext:ExecutionContext {
+    var context:ExecutionContextType {
         get {
             return toContext(self)
         }

@@ -7,6 +7,7 @@
 //
 
 import Result
+import ExecutionContext
 
 extension ResultType {
     /// Enables the chaining of two failable operations where the second operation is asynchronous and
@@ -47,7 +48,7 @@ extension ResultType where Value: AsyncType, Value.Value: ResultType, Error == V
     public func flatten() -> Future<Value.Value.Value, Value.Value.Error> {
         return Future { complete in
             analysis(ifSuccess: { innerFuture in
-                innerFuture.onComplete(ImmediateExecutionContext) { res in
+                innerFuture.onComplete(immediate) { res in
                     complete(res.analysis(ifSuccess: {
                         return Result(value: $0)
                     }, ifFailure: {

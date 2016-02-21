@@ -22,19 +22,21 @@
 
 import Foundation
 import Result
+import ExecutionContext
 
 /// Executes the given task on `Queue.global` and wraps the result of the task in a Future
 public func future<T>(@autoclosure(escaping) task: () -> T) -> Future<T, NoError> {
-    return future(globalContext, task: task)
+    //check that legacy APIs work
+    return future(Queue.global.context, task: task)
 }
 
 /// Executes the given task on `Queue.global` and wraps the result of the task in a Future
 public func future<T>(task: () -> T) -> Future<T, NoError> {
-    return future(globalContext, task: task)
+    return future(global, task: task)
 }
 
 /// Executes the given task on the given context and wraps the result of the task in a Future
-public func future<T>(context: ExecutionContext, task: () -> T) -> Future<T, NoError> {
+public func future<T>(context: ExecutionContextType, task: () -> T) -> Future<T, NoError> {
     return future(context: context) { () -> Result<T, NoError> in
         return Result(value: task())
     }
@@ -42,19 +44,19 @@ public func future<T>(context: ExecutionContext, task: () -> T) -> Future<T, NoE
 
 /// Executes the given task on `Queue.global` and wraps the result of the task in a Future
 public func future<T, E>(@autoclosure(escaping) task: () -> Result<T, E>) -> Future<T, E> {
-    return future(context: globalContext, task: task)
+    return future(context: global, task: task)
 }
 
 /// Executes the given task on `Queue.global` and wraps the result of the task in a Future
 public func future<T, E>(task: () -> Result<T, E>) -> Future<T, E> {
-    return future(context: globalContext, task: task)
+    return future(context: global, task: task)
 }
 
 /// Executes the given task on the given context and wraps the result of the task in a Future
-public func future<T, E>(context c: ExecutionContext, task: () -> Result<T, E>) -> Future<T, E> {
+public func future<T, E>(context c: ExecutionContextType, task: () -> Result<T, E>) -> Future<T, E> {
     let future = Future<T, E>();
     
-    c {
+    c.execute {
         future.complete(task())
     }
     

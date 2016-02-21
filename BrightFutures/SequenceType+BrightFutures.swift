@@ -22,11 +22,12 @@
 
 import Foundation
 import Result
+import ExecutionContext
 
 extension SequenceType {
     /// Turns a sequence of T's into an array of `Future<U>`'s by calling the given closure for each element in the sequence.
     /// If no context is provided, the given closure is executed on `Queue.global`
-    public func traverse<U, E>(context: ExecutionContext = globalContext, f: Generator.Element -> Future<U, E>) -> Future<[U], E> {
+    public func traverse<U, E>(context: ExecutionContextType = global, f: Generator.Element -> Future<U, E>) -> Future<[U], E> {
         return map(f).fold(context, zero: [U]()) { (list: [U], elem: U) -> [U] in
             return list + [elem]
         }
@@ -39,7 +40,7 @@ extension SequenceType where Generator.Element: AsyncType {
     public func firstCompleted() -> Generator.Element {
         let res = Async<Generator.Element.Value>()
         for fut in self {
-            fut.onComplete(globalContext) {
+            fut.onComplete(global) {
                 res.tryComplete($0)
             }
         }
@@ -56,14 +57,14 @@ extension SequenceType where Generator.Element: AsyncType, Generator.Element.Val
     /// (The Swift compiler does not allow a context parameter with a default value
     /// so we define some functions twice)
     public func fold<R>(zero: R, f: (R, Generator.Element.Value.Value) -> R) -> Future<R, Generator.Element.Value.Error> {
-        return fold(globalContext, zero: zero, f: f)
+        return fold(global, zero: zero, f: f)
     }
     
     /// Performs the fold operation over a sequence of futures. The folding is performed
     /// in the given context.
-    public func fold<R>(context: ExecutionContext, zero: R, f: (R, Generator.Element.Value.Value) -> R) -> Future<R, Generator.Element.Value.Error> {
+    public func fold<R>(context: ExecutionContextType, zero: R, f: (R, Generator.Element.Value.Value) -> R) -> Future<R, Generator.Element.Value.Error> {
         return reduce(Future<R, Generator.Element.Value.Error>(value: zero)) { zero, elem in
-            return zero.flatMap(ImmediateExecutionContext) { zeroVal in
+            return zero.flatMap(immediate) { zeroVal in
                 elem.map(context) { elemVal in
                     return f(zeroVal, elemVal)
                 }
@@ -75,15 +76,15 @@ extension SequenceType where Generator.Element: AsyncType, Generator.Element.Val
     /// If one of the futures in the given sequence fails, the returned future will fail
     /// with the error of the first future that comes first in the list.
     public func sequence() -> Future<[Generator.Element.Value.Value], Generator.Element.Value.Error> {
-        return traverse(ImmediateExecutionContext) {
+        return traverse(immediate) {
             // this is not nice at all, but I've been unable to solve it in a better way without crashing the compiler
             return $0 as! Future<Generator.Element.Value.Value, Generator.Element.Value.Error>
         }
     }
     
-    /// See `find<S: SequenceType, T where S.Generator.Element == Future<T>>(seq: S, context c: ExecutionContext, p: T -> Bool) -> Future<T>`
+    /// See `find<S: SequenceType, T where S.Generator.Element == Future<T>>(seq: S, context c: ExecutionContextType, p: T -> Bool) -> Future<T>`
     public func find(p: Generator.Element.Value.Value -> Bool) -> Future<Generator.Element.Value.Value, BrightFuturesError<Generator.Element.Value.Error>> {
-        return find(globalContext, p: p)
+        return find(global, p: p)
     }
     
     /// Returns a future that succeeds with the value from the first future in the given
@@ -91,8 +92,8 @@ extension SequenceType where Generator.Element: AsyncType, Generator.Element.Val
     /// If any of the futures in the given sequence fail, the returned future fails with the
     /// error of the first failed future in the sequence.
     /// If no futures in the sequence pass the test, a future with an error with NoSuchElement is returned.
-    public func find(context: ExecutionContext, p: Generator.Element.Value.Value -> Bool) -> Future<Generator.Element.Value.Value, BrightFuturesError<Generator.Element.Value.Error>> {
-        return sequence().mapError(ImmediateExecutionContext) { error in
+    public func find(context: ExecutionContextType, p: Generator.Element.Value.Value -> Bool) -> Future<Generator.Element.Value.Value, BrightFuturesError<Generator.Element.Value.Error>> {
+        return sequence().mapError(immediate) { error in
             return BrightFuturesError(external: error)
         }.flatMap(context) { val -> Result<Generator.Element.Value.Value, BrightFuturesError<Generator.Element.Value.Error>> in
             for elem in val {

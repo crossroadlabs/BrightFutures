@@ -27,7 +27,7 @@ public class Async<Value>: AsyncType {
     /// This queue is used for all callback related administrative tasks
     /// to prevent that a callback is added to a completed future and never
     /// executed or perhaps excecuted twice.
-    private let ec = DefaultExecutionContext(kind: .Serial)
+    private let ec = ExecutionContext(kind: .Serial)
 
     /// Upon completion of the future, all callbacks are asynchronously scheduled to their
     /// respective execution contexts (which is either given by the client or returned from
@@ -76,11 +76,11 @@ public class Async<Value>: AsyncType {
     /// Adds the given closure as a callback for when the Async completes. The closure is executed on the given context.
     /// If no context is given, the behavior is defined by the default threading model (see README.md)
     /// Returns self
-    public func onComplete(context: ExecutionContext = DefaultThreadingModel(), callback: Value -> Void) -> Self {
+    public func onComplete(context: ExecutionContextType = DefaultThreadingModel(), callback: Value -> Void) -> Self {
         let wrappedCallback : Value -> Void = { [weak self] value in
             let a = self // this is a workaround for a compiler segfault
             
-            context {
+            context.execute {
                 a?.callbackExecutionSemaphore.execute {
                     callback(value)
                 }

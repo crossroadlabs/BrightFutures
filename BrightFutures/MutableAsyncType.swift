@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ExecutionContext
 
 internal protocol MutableAsyncType: AsyncType {
     /// Complete the Async with the given value
@@ -29,6 +30,6 @@ extension MutableAsyncType {
     }
     
     func completeWith<A: AsyncType where A.Value == Value>(other: A) {
-        other.onComplete(ImmediateExecutionContext, callback: self.complete)
+        other.onComplete(immediate, callback: self.complete)
     }
 }
