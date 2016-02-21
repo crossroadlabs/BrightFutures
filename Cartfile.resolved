@@ -1,1 +1,2 @@
-github "antitypical/Result" "1.0.1"
+github "crossroadlabs/Result" "1.0.3"
+github "crossroadlabs/ExecutionContext" "0e6f332268de2e812de855e4bb97d05d25cfde07"

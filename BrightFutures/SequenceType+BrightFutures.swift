@@ -26,7 +26,7 @@ import Result
 extension SequenceType {
     /// Turns a sequence of T's into an array of `Future<U>`'s by calling the given closure for each element in the sequence.
     /// If no context is provided, the given closure is executed on `Queue.global`
-    public func traverse<U, E>(context: ExecutionContext = Queue.global.context, f: Generator.Element -> Future<U, E>) -> Future<[U], E> {
+    public func traverse<U, E>(context: ExecutionContext = globalContext, f: Generator.Element -> Future<U, E>) -> Future<[U], E> {
         return map(f).fold(context, zero: [U]()) { (list: [U], elem: U) -> [U] in
             return list + [elem]
         }
@@ -39,7 +39,7 @@ extension SequenceType where Generator.Element: AsyncType {
     public func firstCompleted() -> Generator.Element {
         let res = Async<Generator.Element.Value>()
         for fut in self {
-            fut.onComplete(Queue.global.context) {
+            fut.onComplete(globalContext) {
                 res.tryComplete($0)
             }
         }
@@ -56,7 +56,7 @@ extension SequenceType where Generator.Element: AsyncType, Generator.Element.Val
     /// (The Swift compiler does not allow a context parameter with a default value
     /// so we define some functions twice)
     public func fold<R>(zero: R, f: (R, Generator.Element.Value.Value) -> R) -> Future<R, Generator.Element.Value.Error> {
-        return fold(Queue.global.context, zero: zero, f: f)
+        return fold(globalContext, zero: zero, f: f)
     }
     
     /// Performs the fold operation over a sequence of futures. The folding is performed
@@ -83,7 +83,7 @@ extension SequenceType where Generator.Element: AsyncType, Generator.Element.Val
     
     /// See `find<S: SequenceType, T where S.Generator.Element == Future<T>>(seq: S, context c: ExecutionContext, p: T -> Bool) -> Future<T>`
     public func find(p: Generator.Element.Value.Value -> Bool) -> Future<Generator.Element.Value.Value, BrightFuturesError<Generator.Element.Value.Error>> {
-        return find(Queue.global.context, p: p)
+        return find(globalContext, p: p)
     }
     
     /// Returns a future that succeeds with the value from the first future in the given

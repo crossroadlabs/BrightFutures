@@ -22,6 +22,7 @@
 
 import XCTest
 import BrightFutures
+import ExecutionContext
 
 class Counter {
     var i: Int = 0
@@ -35,7 +36,7 @@ class ExecutionContextTests: XCTestCase {
         counter.i = 1
         
         ImmediateOnMainExecutionContext {
-            XCTAssert(NSThread.isMainThread())
+            XCTAssert(isMainThread())
             counter.i = 2
         }
         
@@ -44,15 +45,17 @@ class ExecutionContextTests: XCTestCase {
     
     func testImmediateOnMainThreadContextOnBackgroundThread() {
         let e = self.expectation()
-        Queue.global.async {
+        global.async {
             ImmediateOnMainExecutionContext {
-                XCTAssert(NSThread.isMainThread())
+                XCTAssert(isMainThread())
                 e.fulfill()
             }
         }
         
         self.waitForExpectationsWithTimeout(2, handler: nil)
     }
+    
+    #if !os(Linux)
     
     func testDispatchQueueToContext() {
         var key = "key"
@@ -80,6 +83,8 @@ class ExecutionContextTests: XCTestCase {
         
         self.waitForExpectationsWithTimeout(2, handler: nil)
     }
+
+    #endif
     
     func getMutablePointer (object: AnyObject) -> UnsafeMutablePointer<Void> {
         return UnsafeMutablePointer<Void>(bitPattern: Int(ObjectIdentifier(object).uintValue))

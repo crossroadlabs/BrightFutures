@@ -9,13 +9,14 @@
 import XCTest
 import BrightFutures
 import Result
+import ExecutionContext
 
 class PromiseTests: XCTestCase {
 
     func testSuccessPromise() {
         let p = Promise<Int, NoError>()
         
-        Queue.global.async {
+        global.async {
             p.success(fibonacci(10))
         }
         
@@ -38,7 +39,7 @@ class PromiseTests: XCTestCase {
     func testFailurePromise() {
         let p = Promise<Int, TestError>()
         
-        Queue.global.async {
+        global.async {
             p.tryFailure(TestError.JustAnError)
         }
         

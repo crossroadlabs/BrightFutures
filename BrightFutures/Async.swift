@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ExecutionContext
 
 public class Async<Value>: AsyncType {
 
@@ -26,7 +27,7 @@ public class Async<Value>: AsyncType {
     /// This queue is used for all callback related administrative tasks
     /// to prevent that a callback is added to a completed future and never
     /// executed or perhaps excecuted twice.
-    private let queue = Queue()
+    private let ec = DefaultExecutionContext(kind: .Serial)
 
     /// Upon completion of the future, all callbacks are asynchronously scheduled to their
     /// respective execution contexts (which is either given by the client or returned from
@@ -44,7 +45,7 @@ public class Async<Value>: AsyncType {
     }
     
     public required init(result: Value, delay: NSTimeInterval) {
-        Queue.global.after(TimeInterval.In(delay)) {
+        global.async(delay) {
             self.complete(result)
         }
     }
@@ -87,7 +88,7 @@ public class Async<Value>: AsyncType {
             }
         }
         
-        queue.sync {
+        try! ec.sync {
             if let value = self.result {
                 wrappedCallback(value)
             } else {
@@ -103,7 +104,7 @@ public class Async<Value>: AsyncType {
 
 extension Async: MutableAsyncType {
     func tryComplete(value: Value) -> Bool{
-        return queue.sync {
+        return try! ec.sync {
             guard self.result == nil else {
                 return false
             }

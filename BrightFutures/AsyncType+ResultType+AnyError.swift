@@ -12,13 +12,13 @@ import Result
 /// Executes the given task on `Queue.global` and wraps the result of the task in a Future
 /// If the given closure throws, returns an error
 public func future<T>(@autoclosure(escaping) task: () throws -> T) -> Future<T, AnyError> {
-    return future(Queue.global.context, task: task)
+    return future(globalContext, task: task)
 }
 
 /// Executes the given task on `Queue.global` and wraps the result of the task in a Future
 /// If the given closure throws, returns an error
 public func future<T>(task: () throws -> T) -> Future<T, AnyError> {
-    return future(Queue.global.context, task: task)
+    return future(globalContext, task: task)
 }
 
 /// Executes the given task on the given context and wraps the result of the task in a Future

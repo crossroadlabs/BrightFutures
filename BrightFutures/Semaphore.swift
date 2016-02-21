@@ -29,6 +29,8 @@ public enum TimeInterval {
     case Forever
     case In(NSTimeInterval)
     
+    //whatever, may be someone uses it
+    #if !os(Linux)
     /// Returns the `dispatch_time_t` representation of this interval
     public var dispatchTime: dispatch_time_t {
         switch self {
@@ -38,18 +40,40 @@ public enum TimeInterval {
             return dispatch_time(DISPATCH_TIME_NOW, Int64(interval * NSTimeInterval(NSEC_PER_SEC)))
         }
     }
+    #endif
+    
+    public func untilFromNow() -> NSDate? {
+        switch self {
+        case .Forever:
+            return nil
+        case .In(let interval):
+            return NSDate(timeIntervalSinceNow: interval)
+        }
+    }
 }
 
-/// A tiny wrapper around dispatch_semaphore
+extension NSCondition {
+    func waitWithConditionalEnd(date:NSDate?) -> Bool {
+        guard let date = date else {
+            self.wait()
+            return true
+        }
+        return self.waitUntilDate(date)
+    }
+}
+
+/// A tiny wrapper around NSCondition
 public class Semaphore {
 
-    /// The underlying `dispatch_semaphore_t`
-    private(set) public var underlyingSemaphore: dispatch_semaphore_t
+    /// The underlying NSCondition
+    private(set) public var underlyingSemaphore: NSCondition
+    private(set) public var value: Int
     
     /// Creates a new semaphore with the given initial value
-    /// See `dispatch_semaphore_create(value: Int) -> dispatch_semaphore_t!`
+    /// See NSCondition and https://developer.apple.com/library/prerelease/mac/documentation/Cocoa/Conceptual/Multithreading/ThreadSafety/ThreadSafety.html#//apple_ref/doc/uid/10000057i-CH8-SW13
     public init(value: Int) {
-        self.underlyingSemaphore = dispatch_semaphore_create(value)
+        self.underlyingSemaphore = NSCondition()
+        self.value = value
     }
     
     /// Creates a new semaphore with initial value 1
@@ -67,12 +91,33 @@ public class Semaphore {
     /// Returns 0 if the semaphore was signalled before the timeout occurred
     /// or non-zero if the timeout occurred.
     public func wait(timeout: TimeInterval) -> Int {
-        return dispatch_semaphore_wait(self.underlyingSemaphore, timeout.dispatchTime)
+        let until = timeout.untilFromNow()
+        underlyingSemaphore.lock()
+        defer {
+            value -= 1
+            underlyingSemaphore.unlock()
+        }
+        
+        var signaled:Bool = true
+        while value <= 0 {
+            signaled = underlyingSemaphore.waitWithConditionalEnd(until)
+            if !signaled {
+                break
+            }
+        }
+        
+        return signaled ? 0 : 1
     }
     
     /// Performs the signal operation on this semaphore
     public func signal() -> Int {
-        return dispatch_semaphore_signal(self.underlyingSemaphore)
+        underlyingSemaphore.lock()
+        defer {
+            underlyingSemaphore.unlock()
+        }
+        value += 1
+        underlyingSemaphore.signal()
+        return value
     }
 
     /// Executes the given closure between a `self.wait()` and `self.signal()`
