@@ -7,7 +7,8 @@
 //
 
 import XCTest
-import BrightFutures
+@testable import BrightFutures
+import ExecutionContext
 
 class NSOperationQueueTests: XCTestCase {
 
