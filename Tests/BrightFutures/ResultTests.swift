@@ -227,13 +227,27 @@ func divide(a: Int, _ b: Int) -> Result<Int, MathError> {
 
 #if os(Linux)
 extension ResultTests : XCTestCaseProvider {
-    var allTests : [(String, () throws -> Void)] {
-        return [
-            ("testFlattenFailedFutureInSucceededResult", testFlattenFailedFutureInSucceededResult),
-            ("testFlattenFutureInResultFailed", testFlattenFutureInResultFailed),
-            ("testFlattenFutureInResultSuccess", testFlattenFutureInResultSuccess),
-            ("testFlattenInnerFailure", testFlattenInnerFailure)
-        ]
-    }
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testSuccess", testSuccess),
+			("testFailure", testFailure),
+			("testMapSuccess", testMapSuccess),
+			("testMapFailure", testMapFailure),
+			("testFlatMapResultSuccess", testFlatMapResultSuccess),
+			("testFlatMapResultFailure", testFlatMapResultFailure),
+			("testFlatMapFutureSuccess", testFlatMapFutureSuccess),
+			("testFlatMapFutureFailure", testFlatMapFutureFailure),
+			("testSequenceSuccess", testSequenceSuccess),
+			("testSequenceFailure", testSequenceFailure),
+			("testRecoverNeeded", testRecoverNeeded),
+			("testRecoverUnneeded", testRecoverUnneeded),
+			("testFlattenInnerSuccess", testFlattenInnerSuccess),
+			("testFlattenOuterFailure", testFlattenOuterFailure),
+			("testFlattenInnerFailure", testFlattenInnerFailure),
+			("testFlattenFutureInResultSuccess", testFlattenFutureInResultSuccess),
+			("testFlattenFutureInResultFailed", testFlattenFutureInResultFailed),
+			("testFlattenFailedFutureInSucceededResult", testFlattenFailedFutureInSucceededResult),
+		]
+	}
 }
 #endif

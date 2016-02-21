@@ -130,3 +130,20 @@ class InvalidationTokenTests: XCTestCase {
     }
     
 }
+
+#if os(Linux)
+extension InvalidationTokenTests : XCTestCaseProvider {
+	var allTests : [(String, () throws -> Void)] {
+		return [
+			("testInvalidationTokenInit", testInvalidationTokenInit),
+			("testInvalidateToken", testInvalidateToken),
+			("testInvalidationTokenFuture", testInvalidationTokenFuture),
+			("testCompletionAfterInvalidation", testCompletionAfterInvalidation),
+			("testNonInvalidatedSucceededFutureOnSuccess", testNonInvalidatedSucceededFutureOnSuccess),
+			("testNonInvalidatedSucceededFutureOnComplete", testNonInvalidatedSucceededFutureOnComplete),
+			("testNonInvalidatedFailedFutureOnFailure", testNonInvalidatedFailedFutureOnFailure),
+			("testStress", testStress),
+		]
+	}
+}
+#endif
