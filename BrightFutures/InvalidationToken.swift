@@ -8,6 +8,7 @@
 
 import Foundation
 import Result
+import ExecutionContext
 
 /// The type that all invalidation tokens conform to
 public protocol InvalidationTokenType {
@@ -19,20 +20,20 @@ public protocol InvalidationTokenType {
     var future: Future<NoValue, BrightFuturesError<NoError>> { get }
     
     /// This context executes as long as the token is valid. If the token is invalid, the given blocks are discarded
-    func validContext(parentContext: ExecutionContext) -> ExecutionContext
+    func validContext(parentContext: ExecutionContextType) -> ExecutionContextType
 
 }
 
 extension InvalidationTokenType {
     /// Alias of context(parentContext:task:) which uses the default threading model
     /// Due to a limitation of the Swift compiler, we cannot express this with a single method
-    public var validContext: ExecutionContext {
+    public var validContext: ExecutionContextType {
         return validContext(DefaultThreadingModel())
     }
     
-    public func validContext(parentContext: ExecutionContext = DefaultThreadingModel()) -> ExecutionContext {
-        return { task in
-            parentContext {
+    public func validContext(parentContext: ExecutionContextType = DefaultThreadingModel()) -> ExecutionContextType {
+        return executionContext { task in
+            parentContext.execute {
                 if !self.isInvalid {
                     task()
                 }

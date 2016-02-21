@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import ExecutionContext
 
 public extension NSOperationQueue {
-    public var context: ExecutionContext {
-        return { [weak self] task in
+    public var context: ExecutionContextType {
+        return executionContext { [weak self] task in
             self?.addOperation(NSBlockOperation(block: task))
         }
     }

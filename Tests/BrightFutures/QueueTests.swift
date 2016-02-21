@@ -94,7 +94,7 @@ class QueueTests: XCTestCase {
     func testAsyncFuture() {
         // unfortunately, the compiler is not able to figure out that we want the
         // future-returning async method
-        let f: Future<String, NoError> = future(globalContext) {
+        let f: Future<String, NoError> = future(global) {
             NSThread.sleepForTimeInterval(1.0)
             return "fibonacci"
         }

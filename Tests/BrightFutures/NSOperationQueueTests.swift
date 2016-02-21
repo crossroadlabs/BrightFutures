@@ -20,7 +20,7 @@ class NSOperationQueueTests: XCTestCase {
         
         (0...100).forEach { n in
             let e = self.expectation()
-            queue.context {
+            queue.context.execute {
                 sem.execute {
                     i++
                 }

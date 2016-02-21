@@ -20,7 +20,7 @@ public protocol AsyncType {
     init<A: AsyncType where A.Value == Value>(other: A)
     init(@noescape resolver: (result: Value -> Void) -> Void)
     
-    func onComplete(context: ExecutionContext, callback: Value -> Void) -> Self
+    func onComplete(context: ExecutionContextType, callback: Value -> Void) -> Self
 }
 
 public extension AsyncType {
@@ -48,7 +48,7 @@ public extension AsyncType {
         
         let sema = Semaphore(value: 0)
         var res: Value? = nil
-        onComplete(globalContext) {
+        onComplete(global) {
             res = $0
             sema.signal()
         }
@@ -77,7 +77,7 @@ public extension AsyncType {
     public func delay(ec: ExecutionContextType, interval: NSTimeInterval) -> Self {
         return Self { complete in
             ec.async(interval) {
-                self.onComplete(ImmediateExecutionContext, callback: complete)
+                self.onComplete(immediate, callback: complete)
             }
         }
     }
@@ -86,8 +86,8 @@ public extension AsyncType {
 public extension AsyncType where Value: AsyncType {
     public func flatten() -> Self.Value {
         return Self.Value { complete in
-            self.onComplete(ImmediateExecutionContext) { value in
-                value.onComplete(ImmediateExecutionContext, callback: complete)
+            self.onComplete(immediate) { value in
+                value.onComplete(immediate, callback: complete)
             }
         }
     }
