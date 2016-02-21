@@ -1,2 +1,2 @@
 github "crossroadlabs/Result" ~> 1.0
-github "crossroadlabs/ExecutionContext" "master"
+github "crossroadlabs/ExecutionContext" ~> 0.1
