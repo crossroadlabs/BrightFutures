@@ -9,6 +9,11 @@
 import Foundation
 import ExecutionContext
 
+/// This queue is used for all callback related administrative tasks
+/// to prevent that a callback is added to a completed future and never
+/// executed or perhaps excecuted twice.
+private let ec = ExecutionContext(kind: .Serial)// temporary solution to move out of Async to avoid creation of a queue each time. Actually we should get rid of it ideally
+
 public class Async<Value>: AsyncType {
 
     typealias CompletionCallback = Value -> Void
@@ -23,11 +28,6 @@ public class Async<Value>: AsyncType {
             runCallbacks()
         }
     }
-    
-    /// This queue is used for all callback related administrative tasks
-    /// to prevent that a callback is added to a completed future and never
-    /// executed or perhaps excecuted twice.
-    private let ec = ExecutionContext(kind: .Serial)
 
     /// Upon completion of the future, all callbacks are asynchronously scheduled to their
     /// respective execution contexts (which is either given by the client or returned from
