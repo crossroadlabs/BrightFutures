@@ -32,6 +32,6 @@ let package = Package(
     ],
     dependencies: [
         .Package(url:"https://github.com/crossroadlabs/Result.git", majorVersion: 1),
-        .Package(url:"https://github.com/crossroadlabs/ExecutionContext.git", majorVersion: 0, minor: 1),
+        .Package(url:"https://github.com/crossroadlabs/ExecutionContext.git", majorVersion: 0),
     ]
 )
