@@ -53,7 +53,7 @@ public enum TimeInterval {
     }
 }
 
-extension Semaphore {
+extension SemaphoreType {
     /// Executes the given closure between a `self.wait()` and `self.signal()`
     func execute(@noescape task: () -> Void) {
         self.wait()
