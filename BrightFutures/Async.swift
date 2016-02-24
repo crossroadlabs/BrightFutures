@@ -33,7 +33,7 @@ public class Async<Value>: AsyncType {
     /// respective execution contexts (which is either given by the client or returned from
     /// DefaultThreadingModel). Inside the context, this semaphore will be used
     /// to make sure that all callbacks are executed serially.
-    private let callbackExecutionSemaphore = Semaphore(value: 1);
+    private let callbackExecutionSemaphore = LoopSemaphore(value: 1);
     private var callbacks = [CompletionCallback]()
     
     public required init() {
