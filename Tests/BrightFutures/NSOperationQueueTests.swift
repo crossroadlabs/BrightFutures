@@ -17,7 +17,7 @@ class NSOperationQueueTests: XCTestCase {
         queue.maxConcurrentOperationCount = 12
         var i = 0
         
-        let sem = Semaphore()
+        let sem = Semaphore(value: 1)
         
         (0...100).forEach { n in
             let e = self.expectation()

@@ -47,6 +47,10 @@ public extension AsyncType {
         }
         
         let sema = Semaphore(value: 0)
+        sema.willUse()
+        defer {
+            sema.didUse()
+        }
         var res: Value? = nil
         onComplete(global) {
             res = $0
