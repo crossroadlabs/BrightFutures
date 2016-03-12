@@ -1,2 +1,6 @@
+github "crossroadlabs/CUV" "0.1.0"
 github "crossroadlabs/Result" "1.0.3"
-github "crossroadlabs/ExecutionContext" "0.3.0"
+github "crossroadlabs/Boilerplate" "c3ad0f4cd9d8564f688cbe6daa53f3d865c80cba"
+github "crossroadlabs/UV" "75ceedc33f9ecb02bd085fd6b010487567f59880"
+github "crossroadlabs/RunLoop" "2561d164257e1fa733c8b5fa72ade542028a3a12"
+github "crossroadlabs/ExecutionContext" "3cd830eb968b6b7e70c73a08c7a08ee661dda402"

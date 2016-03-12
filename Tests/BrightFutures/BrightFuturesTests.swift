@@ -25,6 +25,7 @@ import Result
 @testable import BrightFutures
 import Result
 import ExecutionContext
+import Boilerplate
 
 class BrightFuturesTests: XCTestCase {
     
@@ -582,7 +583,7 @@ extension BrightFuturesTests {
     
     func testZipThisFails() {
         let f: Future<Bool, NSError> = future { () -> Result<Bool,NSError> in
-            sleep(1.0)
+            Thread.sleep(1.0)
             return Result(error: NSError(domain: "test", code: 2, userInfo: nil))
         }
         
@@ -601,7 +602,7 @@ extension BrightFuturesTests {
     
     func testZipThatFails() {
         let f = future { () -> Result<Int,NSError> in
-            sleep(1.0)
+            Thread.sleep(1.0)
             return Result(error: NSError(domain: "tester", code: 3, userInfo: nil))
         }
         
@@ -620,12 +621,12 @@ extension BrightFuturesTests {
     
     func testZipBothFail() {
         let f = future { () -> Result<Int,NSError> in
-            sleep(1.0)
+            Thread.sleep(1.0)
             return Result(error: NSError(domain: "f-error", code: 3, userInfo: nil))
         }
         
         let f1 = future { () -> Result<Int,NSError> in
-            sleep(1.0)
+            Thread.sleep(1.0)
             return Result(error: NSError(domain: "f1-error", code: 4, userInfo: nil))
         }
         

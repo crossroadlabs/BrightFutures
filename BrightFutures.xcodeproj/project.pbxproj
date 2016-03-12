@@ -7,20 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		659E80AE1C7831D100DE85B1 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9CBFD0B1B8264E500702394 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		659E80B01C78365C00DE85B1 /* ExecutionContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */; };
-		659E80B11C78367A00DE85B1 /* ExecutionContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */; };
-		659E80B21C78368000DE85B1 /* ExecutionContext.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		659E80B61C78958800DE85B1 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9CBFD091B8264D800702394 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		659E80B81C78961E00DE85B1 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98647CD1BF328B400B6BEEE /* Result.framework */; };
-		659E80BA1C78969A00DE85B1 /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E98647CD1BF328B400B6BEEE /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		651586981C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651586971C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift */; };
 		651586991C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651586971C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift */; };
 		6515869A1C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651586971C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift */; };
 		6515869B1C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651586971C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift */; };
+		659E80B61C78958800DE85B1 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9CBFD091B8264D800702394 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		659E80B81C78961E00DE85B1 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98647CD1BF328B400B6BEEE /* Result.framework */; };
+		659E80BA1C78969A00DE85B1 /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E98647CD1BF328B400B6BEEE /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65DF1DC91C29D7730030785A /* BrightFuturesAnyErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF1DC81C29D7730030785A /* BrightFuturesAnyErrorTests.swift */; };
 		65DF1DCA1C29D7730030785A /* BrightFuturesAnyErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF1DC81C29D7730030785A /* BrightFuturesAnyErrorTests.swift */; };
 		65DF1DCB1C29D7730030785A /* BrightFuturesAnyErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF1DC81C29D7730030785A /* BrightFuturesAnyErrorTests.swift */; };
+		65F0F6B01C94987200E1E59B /* Boilerplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AB1C94987200E1E59B /* Boilerplate.framework */; };
+		65F0F6B11C94987200E1E59B /* ExecutionContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AC1C94987200E1E59B /* ExecutionContext.framework */; };
+		65F0F6B21C94987200E1E59B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AD1C94987200E1E59B /* Result.framework */; };
+		65F0F6B31C94987200E1E59B /* RunLoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AE1C94987200E1E59B /* RunLoop.framework */; };
+		65F0F6B41C94987200E1E59B /* UV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AF1C94987200E1E59B /* UV.framework */; };
+		65F0F6B51C94987C00E1E59B /* Boilerplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AB1C94987200E1E59B /* Boilerplate.framework */; };
+		65F0F6B61C94987C00E1E59B /* ExecutionContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AC1C94987200E1E59B /* ExecutionContext.framework */; };
+		65F0F6B71C94987C00E1E59B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AD1C94987200E1E59B /* Result.framework */; };
+		65F0F6B81C94987C00E1E59B /* RunLoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AE1C94987200E1E59B /* RunLoop.framework */; };
+		65F0F6B91C94987C00E1E59B /* UV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AF1C94987200E1E59B /* UV.framework */; };
+		65F0F6BA1C94987F00E1E59B /* Boilerplate.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AB1C94987200E1E59B /* Boilerplate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65F0F6BB1C94987F00E1E59B /* ExecutionContext.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AC1C94987200E1E59B /* ExecutionContext.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65F0F6BC1C94987F00E1E59B /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AD1C94987200E1E59B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65F0F6BD1C94987F00E1E59B /* RunLoop.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AE1C94987200E1E59B /* RunLoop.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65F0F6BE1C94987F00E1E59B /* UV.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0F6AF1C94987200E1E59B /* UV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9039ADD1A45DF8D000DD6F1 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9039ADC1A45DF8D000DD6F1 /* ResultTests.swift */; };
 		E907D1DE1A6AE4A000AB8075 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907D1DD1A6AE4A000AB8075 /* TimeInterval.swift */; };
 		E9319EA41A397D2C00A0604A /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9319EA31A397D2C00A0604A /* QueueTests.swift */; };
@@ -77,8 +88,6 @@
 		E9CA7B411B555DB200102F87 /* MutableAsyncType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA7B401B555DB200102F87 /* MutableAsyncType.swift */; };
 		E9CA7B421B555DB200102F87 /* MutableAsyncType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA7B401B555DB200102F87 /* MutableAsyncType.swift */; };
 		E9CBFD0A1B8264D800702394 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CBFD091B8264D800702394 /* Result.framework */; };
-		E9CBFD0C1B8264E500702394 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CBFD0B1B8264E500702394 /* Result.framework */; };
-		E9D45B0B1AF00659000F6CA7 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D45B001AF00659000F6CA7 /* BrightFutures.framework */; };
 		E9D45B191AF00668000F6CA7 /* InvalidationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D923AB1A6CE29A00CADD9F /* InvalidationToken.swift */; };
 		E9D45B1A1AF00668000F6CA7 /* ExecutionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0831194470190083F7F2 /* ExecutionContext.swift */; };
 		E9D45B1B1AF00668000F6CA7 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF0832194470190083F7F2 /* Future.swift */; };
@@ -104,7 +113,6 @@
 		E9E422C91B1FA5300000558F /* ExecutionContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E422C81B1FA5300000558F /* ExecutionContextTests.swift */; };
 		E9E422CA1B1FA5300000558F /* ExecutionContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E422C81B1FA5300000558F /* ExecutionContextTests.swift */; };
 		E9F496E31B0397EA00F82839 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9DF0815194470060083F7F2 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E9F496E51B03981100F82839 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9D45B001AF00659000F6CA7 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9F496EF1B052F1400F82839 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F496EE1B052F1400F82839 /* Errors.swift */; };
 		E9F496F01B052F1400F82839 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F496EE1B052F1400F82839 /* Errors.swift */; };
 		E9F69B9B1B93347200713A91 /* Result+BrightFutures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F69B9A1B93347200713A91 /* Result+BrightFutures.swift */; };
@@ -159,24 +167,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E9F496E41B03980600F82839 /* CopyFiles */ = {
+		E9F496E41B03980600F82839 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E9F496E51B03981100F82839 /* BrightFutures.framework in CopyFiles */,
-				659E80AE1C7831D100DE85B1 /* Result.framework in CopyFiles */,
-				659E80B21C78368000DE85B1 /* ExecutionContext.framework in CopyFiles */,
+				65F0F6BA1C94987F00E1E59B /* Boilerplate.framework in Copy Frameworks */,
+				65F0F6BB1C94987F00E1E59B /* ExecutionContext.framework in Copy Frameworks */,
+				65F0F6BC1C94987F00E1E59B /* Result.framework in Copy Frameworks */,
+				65F0F6BD1C94987F00E1E59B /* RunLoop.framework in Copy Frameworks */,
+				65F0F6BE1C94987F00E1E59B /* UV.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExecutionContext.framework; path = Carthage/Build/Mac/ExecutionContext.framework; sourceTree = "<group>"; };
 		651586971C29B8830041C5A4 /* AsyncType+ResultType+AnyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AsyncType+ResultType+AnyError.swift"; sourceTree = "<group>"; };
 		65DF1DC81C29D7730030785A /* BrightFuturesAnyErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightFuturesAnyErrorTests.swift; sourceTree = "<group>"; };
+		65F0F6AB1C94987200E1E59B /* Boilerplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Boilerplate.framework; path = Carthage/Build/Mac/Boilerplate.framework; sourceTree = "<group>"; };
+		65F0F6AC1C94987200E1E59B /* ExecutionContext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExecutionContext.framework; path = Carthage/Build/Mac/ExecutionContext.framework; sourceTree = "<group>"; };
+		65F0F6AD1C94987200E1E59B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		65F0F6AE1C94987200E1E59B /* RunLoop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RunLoop.framework; path = Carthage/Build/Mac/RunLoop.framework; sourceTree = "<group>"; };
+		65F0F6AF1C94987200E1E59B /* UV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UV.framework; path = Carthage/Build/Mac/UV.framework; sourceTree = "<group>"; };
 		E9039ADC1A45DF8D000DD6F1 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		E907D1DD1A6AE4A000AB8075 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		E9319EA31A397D2C00A0604A /* QueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -192,7 +207,6 @@
 		E9B377311BD19457007170ED /* PromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		E9CA7B401B555DB200102F87 /* MutableAsyncType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableAsyncType.swift; sourceTree = "<group>"; };
 		E9CBFD091B8264D800702394 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		E9CBFD0B1B8264E500702394 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
 		E9CBFD121B8268FB00702394 /* BrightFutures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrightFutures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D45B001AF00659000F6CA7 /* BrightFutures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrightFutures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D45B0A1AF00659000F6CA7 /* BrightFutures-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrightFutures-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,8 +258,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				659E80B01C78365C00DE85B1 /* ExecutionContext.framework in Frameworks */,
-				E9CBFD0C1B8264E500702394 /* Result.framework in Frameworks */,
+				65F0F6B31C94987200E1E59B /* RunLoop.framework in Frameworks */,
+				65F0F6B21C94987200E1E59B /* Result.framework in Frameworks */,
+				65F0F6B01C94987200E1E59B /* Boilerplate.framework in Frameworks */,
+				65F0F6B11C94987200E1E59B /* ExecutionContext.framework in Frameworks */,
+				65F0F6B41C94987200E1E59B /* UV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,8 +270,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9D45B0B1AF00659000F6CA7 /* BrightFutures.framework in Frameworks */,
-				659E80B11C78367A00DE85B1 /* ExecutionContext.framework in Frameworks */,
+				65F0F6B51C94987C00E1E59B /* Boilerplate.framework in Frameworks */,
+				65F0F6B61C94987C00E1E59B /* ExecutionContext.framework in Frameworks */,
+				65F0F6B71C94987C00E1E59B /* Result.framework in Frameworks */,
+				65F0F6B81C94987C00E1E59B /* RunLoop.framework in Frameworks */,
+				65F0F6B91C94987C00E1E59B /* UV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,8 +319,11 @@
 		E90E9D5D1B1B8A5B00A8F9F3 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				659E80AF1C78365C00DE85B1 /* ExecutionContext.framework */,
-				E9CBFD0B1B8264E500702394 /* Result.framework */,
+				65F0F6AB1C94987200E1E59B /* Boilerplate.framework */,
+				65F0F6AC1C94987200E1E59B /* ExecutionContext.framework */,
+				65F0F6AD1C94987200E1E59B /* Result.framework */,
+				65F0F6AE1C94987200E1E59B /* RunLoop.framework */,
+				65F0F6AF1C94987200E1E59B /* UV.framework */,
 			);
 			name = Mac;
 			sourceTree = "<group>";
@@ -515,7 +538,7 @@
 			buildPhases = (
 				E9D45B061AF00659000F6CA7 /* Sources */,
 				E9D45B071AF00659000F6CA7 /* Frameworks */,
-				E9F496E41B03980600F82839 /* CopyFiles */,
+				E9F496E41B03980600F82839 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -983,9 +1006,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = BrightFutures/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.${PRODUCT_NAME:rfc1034identifier}";
@@ -1012,9 +1037,11 @@
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = BrightFutures/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.${PRODUCT_NAME:rfc1034identifier}";
@@ -1039,8 +1066,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.${PRODUCT_NAME:rfc1034identifier}";
@@ -1061,8 +1090,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = Tests/BrightFutures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.thomvis.${PRODUCT_NAME:rfc1034identifier}";

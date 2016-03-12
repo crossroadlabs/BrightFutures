@@ -25,6 +25,10 @@ Podfile.lock
 *.xcscmblueprint
 
 Carthage/Checkouts/ExecutionContext
+Carthage/Checkouts/Boilerplate
+Carthage/Checkouts/CUV
+Carthage/Checkouts/RunLoop
+Carthage/Checkouts/UV
 
 #Linux
 .build/

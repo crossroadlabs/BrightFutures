@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Boilerplate
+import RunLoop
 import ExecutionContext
 
 /// This queue is used for all callback related administrative tasks
@@ -33,7 +35,7 @@ public class Async<Value>: AsyncType {
     /// respective execution contexts (which is either given by the client or returned from
     /// DefaultThreadingModel). Inside the context, this semaphore will be used
     /// to make sure that all callbacks are executed serially.
-    private let callbackExecutionSemaphore = LoopSemaphore(value: 1);
+    private let callbackExecutionSemaphore = RunLoopSemaphore(value: 1)
     private var callbacks = [CompletionCallback]()
     
     public required init() {
@@ -45,7 +47,7 @@ public class Async<Value>: AsyncType {
     }
     
     public required init(result: Value, delay: NSTimeInterval) {
-        global.async(delay) {
+        global.async(Timeout(timeout:delay)) {
             self.complete(result)
         }
     }
@@ -88,12 +90,17 @@ public class Async<Value>: AsyncType {
             }
         }
         
-        try! ec.sync {
+        let isCurrent = context.isCurrent
+        
+        ec.sync {
             if let value = self.result {
-                wrappedCallback(value)
+                if isCurrent {
+                    callback(value)
+                } else {
+                    wrappedCallback(value)
+                }
             } else {
                 self.callbacks.append(wrappedCallback)
-
             }
         }
         

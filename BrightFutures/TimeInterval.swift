@@ -21,7 +21,9 @@
 // SOFTWARE.
 
 import Foundation
+import Boilerplate
 import ExecutionContext
+import RunLoop
 
 /// Represents a TimeInterval. The interval is either ending 
 /// (e.g. `.In(2)` means 2 seconds)
@@ -51,22 +53,24 @@ public enum TimeInterval {
             return NSDate(timeIntervalSinceNow: interval)
         }
     }
+    
+    public var timeout:Timeout {
+        get {
+            switch self {
+            case .Forever:
+                return .Infinity
+            case .In(let interval):
+                return Timeout(timeout: interval)
+            }
+        }
+    }
 }
 
 extension SemaphoreType {
     /// Executes the given closure between a `self.wait()` and `self.signal()`
     func execute(@noescape task: () -> Void) {
-        self.willUse()
-        defer {
-            self.didUse()
-        }
         self.wait()
         task()
         self.signal()
-    }
-    
-    /// waits...
-    func wait(interval:TimeInterval) -> Bool {
-        return wait(interval.untilFromNow())
     }
 }

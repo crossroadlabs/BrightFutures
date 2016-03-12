@@ -21,11 +21,12 @@
 // SOFTWARE.
 
 import Foundation
+import Boilerplate
 import ExecutionContext
 import CoreFoundation
 
 public func isMainThread() -> Bool {
-    return CFRunLoopGetMain() === CFRunLoopGetCurrent()
+    return Thread.isMain
 }
 
 private class ImmediateOnMainExecutionContextClass : ExecutionContextBase, ExecutionContextType {
@@ -37,21 +38,23 @@ private class ImmediateOnMainExecutionContextClass : ExecutionContextBase, Execu
         }
     }
     
-    func async(after:Double, task:SafeTask) {
-        let sec = time_t(after)
-        let nsec = Int((after - Double(sec)) * 1000 * 1000 * 1000)//nano seconds
-        var time = timespec(tv_sec:sec, tv_nsec: nsec)
-        
-        nanosleep(&time, nil)
-        async(task)
+    func async(after:Timeout, task:SafeTask) {
+        async {
+            Thread.sleep(after)
+            task()
+        }
     }
     
-    func sync<ReturnType>(task:() throws -> ReturnType) throws -> ReturnType {
+    func sync<ReturnType>(task:() throws -> ReturnType) rethrows -> ReturnType {
         if isMainThread() {
             return try task()
         } else {
             return try main.sync(task)
         }
+    }
+    
+    func isEqualTo(other:NonStrictEquatable) -> Bool {
+        return other is ImmediateOnMainExecutionContextClass
     }
 }
 

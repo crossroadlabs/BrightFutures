@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Boilerplate
+import RunLoop
 import ExecutionContext
 
 public protocol AsyncType {
@@ -46,18 +48,14 @@ public extension AsyncType {
             return result
         }
         
-        let sema = Semaphore(value: 0)
-        sema.willUse()
-        defer {
-            sema.didUse()
-        }
+        let sema = RunLoopSemaphore(value: 0)
         var res: Value? = nil
         onComplete(global) {
             res = $0
             sema.signal()
         }
         
-        sema.wait(timeout)
+        sema.wait(timeout.timeout)
         
         return res
     }
@@ -80,7 +78,7 @@ public extension AsyncType {
     /// queue.
     public func delay(ec: ExecutionContextType, interval: NSTimeInterval) -> Self {
         return Self { complete in
-            ec.async(interval) {
+            ec.async(Timeout(timeout: interval)) {
                 self.onComplete(immediate, callback: complete)
             }
         }
